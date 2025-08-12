@@ -4,8 +4,8 @@ import { logError, logWarning } from "saihex/pretty_logs";
 const hostname = Deno.env.get("POSTGRES_HOSTNAME") ?? "localhost:5432";
 const database_name = Deno.env.get("POSTGRES_DATABASE") ??
   "saihex_public_website";
-const database_user = Deno.env.get("POSTGRES_USER") ?? "website_apis";
-const database_pass = Deno.env.get("POSTGRES_PASSWORD") ?? "lovesairo";
+const database_user = Deno.env.get("POSTGRES_USER")
+const database_pass = Deno.env.get("POSTGRES_PASSWORD")
 const pool_size = parseInt(Deno.env.get("POOL_SIZE") ?? "10") ?? 10;
 
 if (!database_user || !database_user) {
