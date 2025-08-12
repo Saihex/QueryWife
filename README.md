@@ -2,9 +2,9 @@
 
 ---
 
-<center>
-<img width="512" alt="SaihexWare Collection Logo" src="https://s3.saihex.com/public/logos/saihexware.svg"/>
-</center>
+<div align="center">
+  <img width="512" alt="SaihexWare Collection Logo" src="https://s3.saihex.com/public/logos/saihexware.svg"/>
+</div>
 
 ---
 
