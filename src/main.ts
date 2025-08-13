@@ -18,6 +18,8 @@ function serializeRow(row: unknown): Record<string, unknown> {
     const val = (row as Record<string, unknown>)[key];
     if (val instanceof Uint8Array) {
       serialized[key] = btoa(String.fromCharCode(...val));
+    } else if (typeof val == "bigint") {
+      serialized[key] = val.toString();
     } else {
       serialized[key] = val;
     }
@@ -75,10 +77,13 @@ async function serveHandler(
   }
 
   const serializedRows = serializeRows(response.rows);
-  return new Response(JSON.stringify(serializedRows), {
+
+  const Json = JSON.stringify(serializedRows);
+
+  return new Response(Json, {
     headers: {
-        "Content-Type": "application/json"
-    }
+      "Content-Type": "application/json",
+    },
   });
 }
 
