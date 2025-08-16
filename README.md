@@ -8,13 +8,24 @@
 
 ---
 
-**QueryWife** is a lightweight Deno server application that acts as a pooled connection layer between your services and your PostgreSQL database. Think of it as your reliable middleman (or middlewoman, if you prefer) that prevents database overload by pooling connections efficiently—especially useful for edge deployments with multiple instances.
+**QueryWife** is a lightweight Deno server application that acts as a pooled
+connection layer between your services and your PostgreSQL database. Think of it
+as your reliable middleman (or middlewoman, if you prefer) that prevents
+database overload by pooling connections efficiently—especially useful for edge
+deployments with multiple instances.
 
-The server listens on port `8080` and applies the same query handling logic for all endpoints except `/health`, which is reserved for Docker health checks. In production, QueryWife runs as a standalone binary, minimizing the risk of runtime code injection or hijacking.
+The server listens on port `8080` and applies the same query handling logic for
+all endpoints except `/health`, which is reserved for Docker health checks. In
+production, QueryWife runs as a standalone binary, minimizing the risk of
+runtime code injection or hijacking.
 
-It also features an automatic restart every 48 hours by exiting with code `1`, relying on Docker’s restart policy (usually `on-failure`) to keep it fresh and stable.
+It also features an automatic restart every 48 hours by exiting with code `1`,
+relying on Docker’s restart policy (usually `on-failure`) to keep it fresh and
+stable.
 
-> ⚠️ **Warning:** QueryWife is designed for internal use behind proper authentication. It will execute *any* SQL query it receives, faithfully and without question—like a loyal wife following your commands. Use with caution!
+> ⚠️ **Warning:** QueryWife is designed for internal use behind proper
+> authentication. It will execute _any_ SQL query it receives, faithfully and
+> without question—like a loyal wife following your commands. Use with caution!
 
 ---
 
@@ -22,26 +33,33 @@ It also features an automatic restart every 48 hours by exiting with code `1`, r
 
 QueryWife reads configuration from the following environment variables:
 
-- `POSTGRES_HOSTNAME`  
+- `POSTGRES_HOSTNAME`\
   The hostname or IP address of the PostgreSQL database server.
 
-- `POSTGRES_DATABASE`  
+- `POSTGRES_PORT`\
+  The port of the PostgreSQL database server.
+
+- `POSTGRES_DATABASE`\
   The name of the specific PostgreSQL database to connect to.
 
-- `POSTGRES_USER`  
+- `POSTGRES_USER`\
   The username used to authenticate with the PostgreSQL server.
 
-- `POSTGRES_PASSWORD`  
+- `POSTGRES_PASSWORD`\
   The password for the PostgreSQL user.
 
-- `POOL_SIZE`  
+- `POSTGRES_APPNAME`\
+  The name that Postgres should recognize this service as.
+
+- `POOL_SIZE`\
   The maximum number of connections to maintain in the database connection pool.
 
 ---
 
 ### Health Check
 
-You can verify that QueryWife and the database connection are healthy by making a GET request to:
+You can verify that QueryWife and the database connection are healthy by making
+a GET request to:
 
 ```
 http://<querywife-host>:8080/health
@@ -57,8 +75,8 @@ I'm alright, honey!
 
 ### Usage Notes
 
-- QueryWife expects requests with a JSON body containing:  
-  - `query`: The SQL query string.  
+- QueryWife expects requests with a JSON body containing:
+  - `query`: The SQL query string.
   - `values`: An array of parameters to bind in the query.
 
 - All responses return JSON arrays of result rows.
