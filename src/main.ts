@@ -110,7 +110,11 @@ async function serveHandler(
 async function SeverCleanup() {
   pretty_print.log("Starting cleanup... 🧹😸");
 
-  db.connection_pool.end();
+  try {
+    await db.connection_pool.end();
+  } catch (_) {
+    //
+  }
 
   await new Promise((resolve) => setTimeout(resolve, 2000));
   pretty_print.log("Cleanup completed, exiting...");
