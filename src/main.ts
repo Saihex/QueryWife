@@ -96,8 +96,13 @@ async function serveHandler(
   setTimeout(async () => {
     pretty_print.log("♻️ RESTARTING NOW: 48-hour auto-restart triggered");
 
-    // Optional: Abort anything long-running
     abortController.abort("48-HOUR RESTART");
+
+    try {
+      await db.connection_pool.end();
+    } catch (_) {
+      //
+    }
 
     // Optional delay to let logs flush / services wind down
     await new Promise((resolve) => setTimeout(resolve, 2000));
