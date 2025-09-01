@@ -4,8 +4,8 @@
     "build": "deno compile --allow-net --allow-env --allow-import --output /app/output/QueryWife src/main.ts"
   },
   "imports": {
-    "@db/postgres": "jsr:@db/postgres@^0.19.5",
     "~/": "./",
+    "@db/postgres": "jsr:@db/postgres@^0.19.5",
     "saihex/pretty_logs": "https://s3.saihex.com/deno-libs/pretty_logs.ts",
     "@std/assert": "jsr:@std/assert@1"
   }
